@@ -10,6 +10,18 @@ const message = joi.object({
   type: joi.string().required().valid("message", "private_message"),
 });
 
-const user = joi.string().trim().required();
+const user = joi
+  .object({
+    user: joi.string().trim().required(),
+  })
+  .unknown();
 
-export default { participant, message, user };
+const from = joi
+  .object({
+    from: joi.string().trim().required(),
+  })
+  .unknown();
+
+const user_from = user.concat(from);
+
+export default { participant, message, user, from, user_from };
