@@ -9,7 +9,16 @@ async function create({ name }) {
   const lastStatusTimestamp = Date.now();
   const formattedTime = dayjs(lastStatusTimestamp).format("HH:mm:ss");
 
-  return await participantsRepositories.create({ name, lastStatus: lastStatusTimestamp, time: formattedTime });
+  const participant = { name, lastStatus: lastStatusTimestamp };
+  const message = {
+    from: name,
+    to: "Todos",
+    text: "entra na sala...",
+    type: "status",
+    time: formattedTime,
+  };
+
+  return await participantsRepositories.create({ participant, message });
 }
 
 export default { create };

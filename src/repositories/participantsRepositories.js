@@ -1,15 +1,9 @@
 import db from "../config/database.js";
 
 // need to turn this into a transaction...
-async function create({ name, lastStatus, time }) {
-  await db.participants.insertOne({ name, lastStatus });
-  await db.messages.insertOne({
-    from: name,
-    to: "Todos",
-    text: "entra na sala...",
-    type: "status",
-    time,
-  });
+async function create({ participant, message }) {
+  await db.participants.insertOne(participant);
+  await db.messages.insertOne(message);
 }
 
 async function findOneByName({ name }) {
