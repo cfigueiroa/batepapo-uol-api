@@ -21,4 +21,8 @@ async function create({ name }) {
   return await participantsRepositories.create({ participant, message });
 }
 
-export default { create };
+async function list() {
+  return await participantsRepositories.list();
+}
+
+export default { create, list };

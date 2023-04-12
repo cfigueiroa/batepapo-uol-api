@@ -10,4 +10,8 @@ async function findOneByName({ name }) {
   return await db.participants.findOne({ name });
 }
 
-export default { create, findOneByName };
+async function list() {
+  return await db.participants.find().toArray();
+}
+
+export default { create, findOneByName, list };

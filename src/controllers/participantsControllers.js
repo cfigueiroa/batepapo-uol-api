@@ -10,8 +10,13 @@ async function create(req, res, next) {
   }
 }
 
-async function main(req, res, next) {
-  res.sendStatus(200);
+async function list(_req, res, next) {
+  try {
+    const participantsList = await participantsServices.list();
+    return res.status(200).send(participantsList);
+  } catch (err) {
+    next(err);
+  }
 }
 
-export default { create, main };
+export default { create, list };

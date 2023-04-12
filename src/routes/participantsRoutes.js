@@ -10,6 +10,6 @@ participantsRoutes.post(
   validationMiddleware(schemas.participant),
   participantsControllers.create
 );
-participantsRoutes.get("/", participantsControllers.main);
+participantsRoutes.get("/", participantsControllers.list);
 
 export default participantsRoutes;
