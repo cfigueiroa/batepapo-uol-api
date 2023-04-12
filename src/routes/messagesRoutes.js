@@ -1,15 +1,17 @@
 import { Router } from "express";
 import messagesControllers from "../controllers/messagesControllers.js";
 import validationMiddleware from "../middlewares/validationMiddleware.js";
+import convertUserHeaderEncodingMiddleware from "../middlewares/convertUserHeaderEncodingMiddleware.js";
 import schemas from "../schemas/index.js";
 
 const messagesRoutes = Router();
 
 messagesRoutes.post(
   "/",
-  validationMiddleware(schemas.from, "headers"),
+  validationMiddleware(schemas.user, "headers"),
   validationMiddleware(schemas.message),
-  messagesControllers.main
+  convertUserHeaderEncodingMiddleware,
+  messagesControllers.create
 );
 messagesRoutes.get("/", validationMiddleware(schemas.user, "headers"), messagesControllers.main);
 messagesRoutes.delete("/:id", validationMiddleware(schemas.user, "headers"), messagesControllers.main);

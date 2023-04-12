@@ -7,7 +7,7 @@ function validationMiddleware(schema, field = "body") {
     });
     if (validationError) {
       const errorMessages = validationError.details.map((detail) => detail.message);
-      throw errors.conflict(errorMessages);
+      throw errors.unprocessableEntity(errorMessages);
     }
     next();
   };
