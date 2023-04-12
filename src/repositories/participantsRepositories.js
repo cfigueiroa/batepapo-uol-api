@@ -1,9 +1,20 @@
 import db from "../config/database.js";
 
-// need to turn this into a transaction...
 async function create({ participant, message }) {
-  await db.participants.insertOne(participant);
-  await db.messages.insertOne(message);
+  const session = db.client.startSession();
+  session.startTransaction();
+
+  try {
+    await db.participants.insertOne(participant, { session });
+    await db.messages.insertOne(message, { session });
+
+    await session.commitTransaction();
+  } catch (error) {
+    await session.abortTransaction();
+    throw error;
+  } finally {
+    session.endSession();
+  }
 }
 
 async function findOneByName({ name }) {

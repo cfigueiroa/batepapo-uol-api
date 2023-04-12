@@ -14,4 +14,4 @@ const db = client.db();
 const participants = db.collection("participants");
 const messages = db.collection("messages");
 
-export default { participants, messages };
+export default { client, participants, messages };
