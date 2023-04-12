@@ -8,7 +8,7 @@ const participantsRoutes = Router();
 participantsRoutes.post(
   "/",
   validationMiddleware(schemas.participant),
-  participantsControllers.main
+  participantsControllers.create
 );
 participantsRoutes.get("/", participantsControllers.main);
 

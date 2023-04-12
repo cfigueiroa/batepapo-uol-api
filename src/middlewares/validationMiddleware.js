@@ -1,4 +1,4 @@
-import * as errors from "../errors/index.js";
+import errors from "../errors/index.js";
 
 function validationMiddleware(schema, field = "body") {
   return (req, _res, next) => {
