@@ -14,4 +14,8 @@ async function create({ message }) {
   await messagesRepositories.create({ newMessage });
 }
 
-export default { create };
+async function list({ user, limit }) {
+  return await messagesRepositories.listUserMessages({ user, limit });
+}
+
+export default { create, list };
