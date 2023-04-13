@@ -14,4 +14,9 @@ async function list() {
   return await db.participants.find().toArray();
 }
 
-export default { create, findOneByName, list };
+async function deleteManyInactive({ currentTimestamp, maxInactivityDuration = 10000 }) {
+  const minAllowedTimestamp = currentTimestamp - maxInactivityDuration;
+  return db.participants.deleteMany({ lastStatus: { $lt: minAllowedTimestamp } });
+}
+
+export default { create, findOneByName, list, deleteManyInactive };
