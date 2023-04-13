@@ -5,6 +5,6 @@ import schemas from "../schemas/index.js";
 
 const statusRoutes = Router();
 
-statusRoutes.post("/", validationMiddleware(schemas.user, "headers"), statusControllers.main);
+statusRoutes.post("/", validationMiddleware(schemas.user, "headers", true), statusControllers.update);
 
 export default statusRoutes;
