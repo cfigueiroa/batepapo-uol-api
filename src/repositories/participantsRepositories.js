@@ -1,4 +1,5 @@
 import db from "../config/database.js";
+import dayjs from "dayjs";
 
 // need to turn this into a transaction...
 async function create({ participant, message }) {
@@ -14,9 +15,25 @@ async function list() {
   return await db.participants.find().toArray();
 }
 
-async function deleteManyInactive({ currentTimestamp, maxInactivityDuration = 10000 }) {
+async function findAndDeleteManyInactive({ currentTimestamp, maxInactivityDuration = 10000 }) {
   const minAllowedTimestamp = currentTimestamp - maxInactivityDuration;
-  return db.participants.deleteMany({ lastStatus: { $lt: minAllowedTimestamp } });
+  const formattedTime = dayjs(currentTimestamp).format("HH:mm:ss");
+  const filter = { lastStatus: { $lt: minAllowedTimestamp } };
+  const users = await db.participants.find(filter).toArray();
+  await db.participants.deleteMany(filter);
+  if (users.length > 0) {
+    await insertExitMessage({ users, formattedTime });
+  }
+  return;
 }
 
-export default { create, findOneByName, list, deleteManyInactive };
+async function insertExitMessage({ users, formattedTime: time }) {
+  const buffer = [];
+  for (let user of users) {
+    const { name: from } = user;
+    buffer.push({ from, to: "Todos", text: "sai da sala...", type: "status", time });
+  }
+  await db.messages.insertMany(buffer);
+}
+
+export default { create, findOneByName, list, findAndDeleteManyInactive };

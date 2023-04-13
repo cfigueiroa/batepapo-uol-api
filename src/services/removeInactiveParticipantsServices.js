@@ -2,7 +2,7 @@ import participantsRepositories from "../repositories/participantsRepositories.j
 
 async function removeInactiveParticipants() {
   const currentTimestamp = Date.now();
-  await participantsRepositories.deleteManyInactive({ currentTimestamp });
+  await participantsRepositories.findAndDeleteManyInactive({ currentTimestamp });
 }
 
 function startRemoveInactiveParticipants() {
