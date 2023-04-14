@@ -15,4 +15,12 @@ async function listUserMessages({ user, limit = 0 }) {
     .toArray();
 }
 
-export default { findOneByName, create, listUserMessages };
+async function findOneById(_id) {
+  return await db.messages.findOne(_id);
+}
+
+async function del(_id) {
+  return await db.messages.deleteOne(_id);
+}
+
+export default { findOneByName, create, listUserMessages, findOneById, del };

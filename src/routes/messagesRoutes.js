@@ -2,7 +2,7 @@ import { Router } from "express";
 import messagesControllers from "../controllers/messagesControllers.js";
 import validationMiddleware from "../middlewares/validationMiddleware.js";
 import convertUserHeaderEncodingMiddleware from "../middlewares/convertUserHeaderEncodingMiddleware.js";
-import validateQueryLimitMiddleware from "../middlewares/validateQueryLimitMiddleware.js"
+import validateQueryLimitMiddleware from "../middlewares/validateQueryLimitMiddleware.js";
 import schemas from "../schemas/index.js";
 
 const messagesRoutes = Router();
@@ -20,12 +20,12 @@ messagesRoutes.get(
   validateQueryLimitMiddleware,
   messagesControllers.list
 );
-messagesRoutes.delete("/:id", validationMiddleware(schemas.user, "headers"), messagesControllers.main);
+messagesRoutes.delete("/:id", validationMiddleware(schemas.user, "headers"), messagesControllers.del);
 messagesRoutes.put(
   "/:id",
   validationMiddleware(schemas.user_from, "headers"),
   validationMiddleware(schemas.message),
-  messagesControllers.main
+  messagesControllers.update
 );
 
 export default messagesRoutes;

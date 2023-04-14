@@ -26,8 +26,24 @@ async function list(req, res, next) {
   }
 }
 
-async function main(req, res, next) {
-  res.sendStatus(200);
+async function del(req, res, next) {
+  const { user } = req.headers;
+  const { id } = req.params;
+
+  try {
+    await messagesServices.del({ user, id });
+    return res.sendStatus(200);
+  } catch (err) {
+    next(err);
+  }
 }
 
-export default { main, create, list };
+async function update(req, res, next) {
+  try {
+    res.sendStatus(201);
+  } catch (error) {
+    next(err);
+  }
+}
+
+export default { create, list, del, update };
