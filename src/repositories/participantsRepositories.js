@@ -7,23 +7,23 @@ async function create({ participant, message }) {
 }
 
 async function findOneByName({ name }) {
-  return await db.participants.findOne({ name });
+  return db.participants.findOne({ name });
 }
 
 async function list() {
-  return await db.participants.find().toArray();
+  return db.participants.find().toArray();
 }
 
 async function find({ filter }) {
-  return await db.participants.find(filter).toArray();
+  return db.participants.find(filter).toArray();
 }
 
 async function deleteMany({ filter }) {
-  return await db.participants.deleteMany(filter);
+  return db.participants.deleteMany(filter);
 }
 
 async function insertMany({ messages }) {
-  return await db.messages.insertMany(messages);
+  return db.messages.insertMany(messages);
 }
 
 export default { create, findOneByName, list, deleteMany, insertMany, find };

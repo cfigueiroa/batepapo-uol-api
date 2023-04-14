@@ -18,11 +18,11 @@ async function create({ name }) {
     time: formattedTime,
   };
 
-  return await participantsRepositories.create({ participant, message });
+  return participantsRepositories.create({ participant, message });
 }
 
 async function list() {
-  return await participantsRepositories.list();
+  return participantsRepositories.list();
 }
 
 export default { create, list };

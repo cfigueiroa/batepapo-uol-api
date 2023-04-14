@@ -6,7 +6,7 @@ async function update({ name }) {
   if (!existingParticipant) throw errors.notFound();
   const { _id } = existingParticipant;
   const lastStatus = Date.now();
-  return await statusRepositories.updateParticipantLastStatus({ _id, lastStatus });
+  return statusRepositories.updateParticipantLastStatus({ _id, lastStatus });
 }
 
 export default { update };
