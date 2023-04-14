@@ -16,12 +16,4 @@ const user = joi
   })
   .unknown();
 
-const from = joi
-  .object({
-    from: joi.string().trim().required(),
-  })
-  .unknown();
-
-const user_from = user.concat(from);
-
-export default { participant, message, user, from, user_from };
+export default { participant, message, user };

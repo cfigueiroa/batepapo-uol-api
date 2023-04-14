@@ -9,7 +9,7 @@ routes.use("/participants", participantsRoutes);
 routes.use("/messages", messagesRoutes);
 routes.use("/status", statusRoutes);
 
-routes.all("*", (_req, res, _next) => {
+routes.all("*", (_req, res) => {
   res.sendStatus(404);
 });
 

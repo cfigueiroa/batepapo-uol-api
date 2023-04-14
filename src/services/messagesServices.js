@@ -42,8 +42,6 @@ async function update({ newMessage, id }) {
   const objectId = new ObjectId(validMongoId(id));
   const message = await messagesRepositories.findOneById({ _id: objectId });
 
-  console.log(message)
-
   if (!message) {
     throw errors.notFound();
   }

@@ -8,7 +8,7 @@ async function create(req, res, next) {
 
   try {
     await messagesServices.create({ message });
-    return res.sendStatus(201);
+    res.sendStatus(201);
   } catch (err) {
     next(err);
   }
@@ -20,7 +20,7 @@ async function list(req, res, next) {
 
   try {
     const messages = await messagesServices.list({ user, limit });
-    return res.send(messages);
+    res.send(messages);
   } catch (err) {
     next(err);
   }
@@ -32,7 +32,7 @@ async function del(req, res, next) {
 
   try {
     await messagesServices.del({ user, id });
-    return res.sendStatus(200);
+    res.sendStatus(200);
   } catch (err) {
     next(err);
   }
@@ -47,7 +47,7 @@ async function update(req, res, next) {
 
   try {
     await messagesServices.update({ newMessage, id });
-    return res.sendStatus(200);
+    res.sendStatus(200);
   } catch (err) {
     next(err);
   }
