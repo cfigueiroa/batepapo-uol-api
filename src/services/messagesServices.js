@@ -17,7 +17,7 @@ async function create({ message }) {
 }
 
 async function list({ user, limit }) {
-  return await messagesRepositories.listUserMessages({ user, limit });
+  return messagesRepositories.listUserMessages({ user, limit });
 }
 
 async function del({ user, id }) {

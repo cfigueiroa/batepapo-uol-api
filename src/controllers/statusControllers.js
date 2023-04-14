@@ -1,13 +1,10 @@
 import statusServices from "../services/statusServices.js";
 
-async function update(req, res, next) {
+async function update(req, res) {
   const { user: name } = req.headers;
-  try {
-    await statusServices.update({ name });
-    res.sendStatus(200);
-  } catch (err) {
-    next(err);
-  }
+
+  await statusServices.update({ name });
+  res.sendStatus(200);
 }
 
 export default { update };
