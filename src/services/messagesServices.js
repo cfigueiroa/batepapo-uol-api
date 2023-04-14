@@ -1,7 +1,7 @@
 import messagesRepositories from "../repositories/messagesRepositories.js";
 import errors from "../errors/index.js";
 import dayjs from "dayjs";
-import isValidMongoId from "../utils/isValidMongoId.js";
+import validMongoId from "../utils/ValidMongoId.js";
 import { ObjectId } from "mongodb";
 
 async function create({ message }) {
@@ -21,17 +21,22 @@ async function list({ user, limit }) {
 }
 
 async function del({ user, id }) {
-  if (!isValidMongoId(id)) throw errors.notFound();
+  const objectId = new ObjectId(validMongoId(id));
+  const message = await messagesRepositories.findOneById({ _id: objectId });
 
-  const message = await messagesRepositories.findOneById({ _id: new ObjectId(id) });
-  if (!message) throw errors.notFound();
+  if (!message) {
+    throw errors.notFound();
+  }
 
-  if (message.from === user) {
+  const isAuthorized = message.from === user;
+
+  if (isAuthorized) {
     const { _id } = message;
     await messagesRepositories.del({ _id });
   } else {
     throw errors.unauthorized();
   }
 }
+
 
 export default { create, list, del };
