@@ -38,5 +38,24 @@ async function del({ user, id }) {
   }
 }
 
+async function update({ newMessage, id }) {
+  const objectId = new ObjectId(validMongoId(id));
+  const message = await messagesRepositories.findOneById({ _id: objectId });
 
-export default { create, list, del };
+  console.log(message)
+
+  if (!message) {
+    throw errors.notFound();
+  }
+
+  const isAuthorized = message.from === newMessage.from;
+
+  if (isAuthorized) {
+    const { _id } = message;
+    await messagesRepositories.update({ _id }, { $set: newMessage });
+  } else {
+    throw errors.unauthorized();
+  }
+}
+
+export default { create, list, del, update };

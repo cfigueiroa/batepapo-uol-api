@@ -23,8 +23,9 @@ messagesRoutes.get(
 messagesRoutes.delete("/:id", validationMiddleware(schemas.user, "headers"), messagesControllers.del);
 messagesRoutes.put(
   "/:id",
-  validationMiddleware(schemas.user_from, "headers"),
+  validationMiddleware(schemas.user, "headers"),
   validationMiddleware(schemas.message),
+  convertUserHeaderEncodingMiddleware,
   messagesControllers.update
 );
 

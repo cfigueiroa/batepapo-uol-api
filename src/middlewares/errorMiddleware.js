@@ -7,6 +7,7 @@ function errorMiddleware(err, _req, res, _next) {
   switch (err.name) {
     case "UnauthorizedError":
       statusCode = httpStatus.UNAUTHORIZED;
+      break;
     case "NotFoundError":
       statusCode = httpStatus.NOT_FOUND;
       break;

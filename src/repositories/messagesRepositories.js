@@ -23,4 +23,8 @@ async function del(_id) {
   return await db.messages.deleteOne(_id);
 }
 
-export default { findOneByName, create, listUserMessages, findOneById, del };
+async function update(filter, newMessage) {
+  return await db.messages.updateOne(filter, newMessage);
+}
+
+export default { findOneByName, create, listUserMessages, findOneById, del, update };
