@@ -7,7 +7,7 @@ const errorStatusCodes = {
   UnprocessableEntityError: httpStatus.UNPROCESSABLE_ENTITY,
 };
 
-function errorMiddleware(err, _req, res, _next) {
+function errorMiddleware(err, _req, res) {
   const response = err.message || "Internal Server Error";
   const statusCode = errorStatusCodes[err.name] || httpStatus.INTERNAL_SERVER_ERROR;
 
