@@ -1,7 +1,8 @@
 import { MongoClient } from "mongodb";
 import "dotenv/config";
 
-const client = new MongoClient(process.env.DATABASE_URL);
+const DATABASE_URL = process.env.DATABASE_URL ?? "mongodb://127.0.0.1:27017/bpuol";
+const client = new MongoClient(DATABASE_URL);
 
 try {
   await client.connect();

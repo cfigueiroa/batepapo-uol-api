@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import validMongoId from "../utils/ValidMongoId.js";
 import { ObjectId } from "mongodb";
 
-async function create({ message }) {
+async function create({ message }: any) {
   const { from: name } = message;
 
   const existingParticipant = await messagesRepositories.findOneByName({ name });
@@ -16,11 +16,11 @@ async function create({ message }) {
   await messagesRepositories.create({ newMessage });
 }
 
-async function list({ user, limit }) {
+async function list({ user, limit }: any) {
   return messagesRepositories.listUserMessages({ user, limit });
 }
 
-async function del({ user, id }) {
+async function del({ user, id }: any) {
   const objectId = new ObjectId(validMongoId(id));
   const message = await messagesRepositories.findOneById({ _id: objectId });
 
@@ -38,7 +38,7 @@ async function del({ user, id }) {
   }
 }
 
-async function update({ newMessage, id }) {
+async function update({ newMessage, id }: any) {
   const objectId = new ObjectId(validMongoId(id));
   const message = await messagesRepositories.findOneById({ _id: objectId });
 

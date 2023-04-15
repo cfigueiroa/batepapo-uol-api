@@ -1,4 +1,4 @@
-function errorFactory(name, message) {
+function errorFactory(name: string, message: string) {
   return { name, message };
 }
 

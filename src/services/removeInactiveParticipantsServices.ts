@@ -18,8 +18,8 @@ async function removeInactiveParticipants() {
   }
 }
 
-function createExitMessages({ users, formattedTime }) {
-  return users.map((user) => ({
+function createExitMessages({ users, formattedTime }: any) {
+  return users.map((user: any) => ({
     from: user.name,
     to: "Todos",
     text: "sai da sala...",

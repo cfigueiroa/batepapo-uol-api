@@ -1,6 +1,7 @@
+import { Request, Response, NextFunction } from "express";
 import errors from "../errors/index.js";
 
-function validateQueryLimitMiddleware(req, res, next) {
+function validateQueryLimitMiddleware(req: Request, res: Response, next: NextFunction) {
   const { limit } = req.query;
 
   if (limit === undefined) {
