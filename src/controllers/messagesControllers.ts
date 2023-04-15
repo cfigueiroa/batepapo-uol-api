@@ -1,6 +1,7 @@
+import { Request, Response } from 'express';
 import messagesServices from "../services/messagesServices.js";
 
-async function create(req, res) {
+async function create(req: Request, res: Response) {
   const { to, text, type } = req.body;
   const { user: from } = req.headers;
 
@@ -10,7 +11,7 @@ async function create(req, res) {
   res.sendStatus(201);
 }
 
-async function list(req, res) {
+async function list(req: Request, res: Response) {
   const { user } = req.headers;
   const { limit } = res.locals;
 
@@ -18,7 +19,7 @@ async function list(req, res) {
   res.send(messages);
 }
 
-async function del(req, res) {
+async function del(req: Request, res: Response) {
   const { user } = req.headers;
   const { id } = req.params;
 
@@ -26,7 +27,7 @@ async function del(req, res) {
   res.sendStatus(200);
 }
 
-async function update(req, res) {
+async function update(req: Request, res: Response) {
   const { to, text, type } = req.body;
   const { user: from } = req.headers;
   const { id } = req.params;

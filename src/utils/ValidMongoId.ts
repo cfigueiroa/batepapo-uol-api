@@ -1,4 +1,4 @@
-function validMongoId(input) {
+function validMongoId(input: string | number) {
   const isStringOf24HexCharacters = typeof input === "string" && input.length === 24 && /^[0-9a-fA-F]+$/.test(input);
   const isStringOf12Bytes = typeof input === "string" && input.length === 12 && /^[0-9a-fA-F]+$/.test(input);
   const isNumberConvertibleTo24Hex =

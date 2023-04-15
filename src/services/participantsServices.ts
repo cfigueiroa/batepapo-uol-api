@@ -2,7 +2,7 @@ import participantsRepositories from "../repositories/participantsRepositories.j
 import errors from "../errors/index.js";
 import dayjs from "dayjs";
 
-async function create({ name }) {
+async function create({ name }: any) {
   const existingParticipant = await participantsRepositories.findOneByName({ name });
   if (existingParticipant) throw errors.conflict();
 

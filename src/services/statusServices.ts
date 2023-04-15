@@ -1,7 +1,7 @@
 import statusRepositories from "../repositories/statusRepositories.js";
 import errors from "../errors/index.js";
 
-async function update({ name }) {
+async function update({ name }: any) {
   const existingParticipant = await statusRepositories.findOneByName({ name });
 
   if (!existingParticipant) {

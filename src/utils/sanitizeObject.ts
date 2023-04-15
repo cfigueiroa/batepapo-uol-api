@@ -1,14 +1,14 @@
 import { stripHtml } from "string-strip-html";
 
-function isString(value) {
+function isString(value: unknown): value is string {
   return typeof value === "string";
 }
 
-function sanitizeString(value) {
+function sanitizeString(value: string) {
   return stripHtml(value).result.trim();
 }
 
-function sanitizeObject(obj) {
+function sanitizeObject(obj: Record<string, any>) {
   for (const key in obj) {
     if (!obj.hasOwnProperty(key)) {
       continue;
